@@ -3,139 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shreeraj | Theatrical Portfolio</title>
+    <title>Shreeraj | SYSTEM.ROOT</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- RGB Whirl Canvas -->
-    <canvas id="pixelCanvas" class="pixel-canvas"></canvas>
+    <!-- Custom Neon Green Blob Cursor -->
+    <div id="customCursor" class="neon-blob"></div>
 
-    <!-- Theatrical Curtains (Fixed overlay) -->
-    <div class="curtain curtain-left"></div>
-    <div class="curtain curtain-right"></div>
+    <div class="layout-wrapper">
+        
+        <!-- Left Side: Matrix Hacker Theme -->
+        <aside class="matrix-sidebar" id="matrixSidebar">
+            <div class="matrix-overlay-text">SYSTEM.ACCESS</div>
+            <canvas id="matrixCanvas"></canvas>
+        </aside>
 
-    <!-- Top Right About Me Button (Candle) -->
-    <div id="aboutBtn" class="candle-wrapper top-right-btn">
-        <div class="candle">
-            <div class="flame"></div>
-            <div class="wick"></div>
-            <div class="wax"></div>
-        </div>
-        <span class="candle-label">About Me</span>
+        <!-- Center: Scrollable Content -->
+        <main class="center-content">
+            
+            <!-- Section 1: Intro -->
+            <section id="intro" class="section">
+                <h1 class="hero-text peek-element">_SHREERAJ</h1>
+                <p class="hero-subtext">> INITIALIZING_PORTFOLIO...</p>
+                <div class="blinking-cursor">_</div>
+            </section>
+
+            <!-- Section 2: Skills -->
+            <section id="skills" class="section">
+                <h2 class="section-title">> MODULE_SKILLS</h2>
+                <div class="skills-container">
+                    <div class="skill-card mech-button peek-element">JavaScript</div>
+                    <div class="skill-card mech-button peek-element">React</div>
+                    <div class="skill-card mech-button peek-element">HTML & CSS</div>
+                    <div class="skill-card mech-button peek-element">Node.js</div>
+                    <div class="skill-card mech-button peek-element">UI/UX Design</div>
+                    <div class="skill-card mech-button peek-element">Figma</div>
+                    <div class="skill-card mech-button peek-element">Python</div>
+                    <div class="skill-card mech-button peek-element">SQL</div>
+                </div>
+            </section>
+
+            <!-- Section 3: Projects -->
+            <section id="projects" class="section">
+                <h2 class="section-title">> EXECUTABLES</h2>
+                <div class="projects-list">
+                    <div class="project-row mech-button peek-element" data-title="Project Alpha" data-desc="A revolutionary mobile application for productivity." data-link="https://github.com">
+                        <div class="row-header">
+                            <h3>[01] Project Alpha</h3>
+                            <span class="status">RUNNING</span>
+                        </div>
+                        <p>> A revolutionary mobile app...</p>
+                    </div>
+                    <div class="project-row mech-button peek-element" data-title="Project Beta" data-desc="E-commerce platform with seamless payment integration." data-link="https://github.com">
+                        <div class="row-header">
+                            <h3>[02] Project Beta</h3>
+                            <span class="status">RUNNING</span>
+                        </div>
+                        <p>> E-commerce platform...</p>
+                    </div>
+                    <div class="project-row mech-button peek-element" data-title="Project Gamma" data-desc="AI-powered data analytics dashboard." data-link="https://github.com">
+                        <div class="row-header">
+                            <h3>[03] Project Gamma</h3>
+                            <span class="status">RUNNING</span>
+                        </div>
+                        <p>> Data analytics dashboard...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Anecdotes -->
+            <section id="anecdotes" class="section">
+                <h2 class="section-title">> SYSTEM_LOGS.TXT</h2>
+                <div class="anecdotes-list">
+                    <div class="anecdote-row mech-button peek-element">
+                        <p class="quote">"Shreeraj delivered an outstanding product that exceeded all our expectations."</p>
+                        <p class="author">-- Jane_Doe (ADMIN)</p>
+                    </div>
+                    <div class="anecdote-row mech-button peek-element">
+                        <p class="quote">"An absolute pleasure to work with. The attention to detail is unparalleled."</p>
+                        <p class="author">-- John_Smith (USER)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Contact & Socials -->
+            <section id="contact" class="section">
+                <h2 class="section-title">> PING_REQUEST</h2>
+                <div class="contact-split">
+                    <div class="contact-form-container mech-panel">
+                        <form id="contactForm">
+                            <input type="text" placeholder="NAME.var" required class="mech-input peek-element">
+                            <input type="email" placeholder="EMAIL.var" required class="mech-input peek-element">
+                            <textarea placeholder="PAYLOAD.string" rows="4" required class="mech-input peek-element"></textarea>
+                            <button type="submit" class="submit-btn mech-button peek-element">EXECUTE PING</button>
+                        </form>
+                    </div>
+                    <div class="social-links-container mech-panel">
+                        <h3 class="social-title">> EXTERNAL_NODES</h3>
+                        <div class="social-buttons">
+                            <a href="https://github.com" target="_blank" class="social-btn mech-button peek-element">GITHUB.exe</a>
+                            <a href="https://linkedin.com" target="_blank" class="social-btn mech-button peek-element">LINKEDIN.exe</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Right Side: Index Navigation -->
+        <nav class="index-sidebar mech-panel">
+            <h3 class="index-title">INDEX</h3>
+            <ul class="nav-links">
+                <li><a href="#intro" class="nav-btn mech-button">/root</a></li>
+                <li><a href="#skills" class="nav-btn mech-button">/skills</a></li>
+                <li><a href="#projects" class="nav-btn mech-button">/execs</a></li>
+                <li><a href="#anecdotes" class="nav-btn mech-button">/logs</a></li>
+                <li><a href="#contact" class="nav-btn mech-button">/ping</a></li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <!-- Mechanical About Me Button -->
+                <button id="aboutBtn" class="mech-button push-heavy peek-element">
+                    <span class="btn-text">ABOUT ME</span>
+                </button>
+            </div>
+        </nav>
+
     </div>
 
-    <!-- Section 1: Intro -->
-    <section id="intro" class="section snap-section">
-        <h1 class="hero-text">Shreeraj</h1>
-        <p class="hero-subtext">A grand performance in code & design.</p>
-    </section>
-
-    <!-- Section 2: Skills -->
-    <section id="skills" class="section">
-        <h2 class="section-title">My Repertoire</h2>
-        <div class="skills-container">
-            <div class="skill-card apple-glass">JavaScript</div>
-            <div class="skill-card apple-glass">React</div>
-            <div class="skill-card apple-glass">HTML & CSS</div>
-            <div class="skill-card apple-glass">Node.js</div>
-            <div class="skill-card apple-glass">UI/UX Design</div>
-            <div class="skill-card apple-glass">Figma</div>
-            <div class="skill-card apple-glass">Python</div>
-            <div class="skill-card apple-glass">SQL</div>
-        </div>
-    </section>
-
-    <!-- Section 3: Projects -->
-    <section id="projects" class="section">
-        <h2 class="section-title">Featured Acts</h2>
-        <div class="projects-grid">
-            <div class="project-card apple-glass" data-title="Project Alpha" data-desc="A revolutionary mobile application for productivity." data-link="https://github.com">
-                <h3>Project Alpha</h3>
-                <p>A revolutionary mobile app...</p>
-            </div>
-            <div class="project-card apple-glass" data-title="Project Beta" data-desc="E-commerce platform with seamless payment integration." data-link="https://github.com">
-                <h3>Project Beta</h3>
-                <p>E-commerce platform...</p>
-            </div>
-            <div class="project-card apple-glass" data-title="Project Gamma" data-desc="AI-powered data analytics dashboard." data-link="https://github.com">
-                <h3>Project Gamma</h3>
-                <p>Data analytics dashboard...</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 4: Anecdotes -->
-    <section id="anecdotes" class="section">
-        <h2 class="section-title">Critical Acclaim</h2>
-        <div class="anecdotes-container">
-            <div class="anecdote-card apple-glass">
-                <p class="quote">"Shreeraj delivered an outstanding product that exceeded all our expectations. Highly recommended!"</p>
-                <p class="author">Jane Doe, CEO</p>
-            </div>
-            <div class="anecdote-card apple-glass">
-                <p class="quote">"An absolute pleasure to work with. The attention to detail and design sense is unparalleled."</p>
-                <p class="author">John Smith, Founder</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 5: Contact & Socials -->
-    <section id="contact" class="section">
-        <h2 class="section-title approachable-title">We'd love to hear from you</h2>
-        <p class="contact-subtext">Whether it's a new project, a collaboration, or just a hello, our stage is always open.</p>
-        <div class="contact-split">
-            <div class="contact-form-container apple-glass form-glass">
-                <form id="contactForm">
-                    <input type="text" placeholder="Your Name" required class="apple-input">
-                    <input type="email" placeholder="Your Email" required class="apple-input">
-                    <textarea placeholder="Your Message..." rows="4" required class="apple-input"></textarea>
-                    <button type="submit" class="submit-btn apple-glass-btn">Send Message</button>
-                </form>
-            </div>
-            <div class="social-links-container apple-glass">
-                <h3 class="social-title">Connect Backstage</h3>
-                <div class="social-buttons">
-                    <a href="https://github.com" target="_blank" class="candle-wrapper social-candle">
-                        <div class="candle">
-                            <div class="flame"></div>
-                            <div class="wick"></div>
-                            <div class="wax"></div>
-                        </div>
-                        <span class="candle-label">GitHub</span>
-                    </a>
-                    <a href="https://linkedin.com" target="_blank" class="candle-wrapper social-candle">
-                        <div class="candle">
-                            <div class="flame"></div>
-                            <div class="wick"></div>
-                            <div class="wax"></div>
-                        </div>
-                        <span class="candle-label">LinkedIn</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Details Modal (Borderless Fading Squircle) -->
+    <!-- Modals -->
+    <!-- Project Modal -->
     <div class="modal-overlay" id="projectModal">
-        <div class="modal-content apple-glass borderless-modal">
-            <button class="close-btn" id="closeProjectModal">×</button>
+        <div class="modal-content mech-panel peek-element">
+            <button class="close-btn mech-button" id="closeProjectModal">[X]</button>
             <h2 id="modalTitle">Project Title</h2>
             <p id="modalDesc">Project description goes here.</p>
-            <a href="#" target="_blank" id="modalLink" class="apple-glass-btn btn-large">View Full Project</a>
+            <a href="#" target="_blank" id="modalLink" class="btn mech-button">RUN LINK</a>
         </div>
     </div>
 
     <!-- About Me Modal -->
     <div class="modal-overlay" id="aboutModal">
-        <div class="modal-content apple-glass borderless-modal">
-            <button class="close-btn" id="closeAboutModal">×</button>
-            <h2>About Me</h2>
+        <div class="modal-content mech-panel peek-element">
+            <button class="close-btn mech-button" id="closeAboutModal">[X]</button>
+            <h2>> WHOAMI</h2>
             <p class="about-text">
-                I am Shreeraj, a passionate developer and designer with a flair for the dramatic. 
-                I specialize in creating immersive, high-performance web experiences that blend cutting-edge 
-                technology with theatrical design principles. Welcome to my digital stage.
+                I am Shreeraj, a developer bridging the gap between retro mechanical aesthetics and modern web performance.
+                System operational. All nodes nominal.
             </p>
         </div>
     </div>
