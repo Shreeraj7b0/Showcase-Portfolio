@@ -1,47 +1,123 @@
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. Neon Green Blob Cursor
+    const cursor = document.getElementById('customCursor');
     
-    // 1. Modals Logic
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    // Modals
+    // 2. Modern UI Peek Effect Logic
+    // We need to pass the mouse coordinates relative to each peek-element as CSS variables
+    const peekElements = document.querySelectorAll('.peek-element');
+
+    window.addEventListener('mousemove', (e) => {
+        // Update Cursor
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+
+        // Update Peek Elements
+        peekElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            // Calculate mouse position relative to the element
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Set variables
+            el.style.setProperty('--mouse-x', `${x}px`);
+            el.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    // 3. Matrix Digital Rain on Left Sidebar
+    const matrixCanvas = document.getElementById('matrixCanvas');
+    const ctx = matrixCanvas.getContext('2d');
+    const matrixSidebar = document.getElementById('matrixSidebar');
+
+    let matrixInterval;
+    let isMatrixRunning = false;
+
+    // Set canvas dimensions to match sidebar
+    const resizeMatrix = () => {
+        matrixCanvas.width = matrixSidebar.clientWidth;
+        matrixCanvas.height = matrixSidebar.clientHeight;
+    };
+    window.addEventListener('resize', resizeMatrix);
+    resizeMatrix();
+
+    // Characters for the rain
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%""\'#&_(),.;:?!\\|{}<>[]^~'.split('');
+    const fontSize = 14;
+    let columns = matrixCanvas.width / fontSize;
+    let drops = [];
+
+    const resetDrops = () => {
+        columns = matrixCanvas.width / fontSize;
+        drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+    };
+    resetDrops();
+
+    const drawMatrix = () => {
+        // Translucent black to create fading trail
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+        ctx.fillStyle = '#0F0'; // Neon green text
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    };
+
+    // Only run matrix on hover
+    matrixSidebar.addEventListener('mouseenter', () => {
+        if (!isMatrixRunning) {
+            isMatrixRunning = true;
+            matrixInterval = setInterval(drawMatrix, 33); // ~30fps
+        }
+    });
+
+    matrixSidebar.addEventListener('mouseleave', () => {
+        isMatrixRunning = false;
+        clearInterval(matrixInterval);
+        // Clear canvas
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+    });
+
+    // 4. Modals Logic
+    const projectRows = document.querySelectorAll('.project-row');
     const projectModal = document.getElementById('projectModal');
     const aboutModal = document.getElementById('aboutModal');
-    
-    // Close Buttons
     const closeProjectBtn = document.getElementById('closeProjectModal');
     const closeAboutBtn = document.getElementById('closeAboutModal');
-    
-    // About Button
     const aboutBtn = document.getElementById('aboutBtn');
     
-    // Project Modal Content Elements
     const modalTitle = document.getElementById('modalTitle');
     const modalDesc = document.getElementById('modalDesc');
     const modalLink = document.getElementById('modalLink');
 
-    // Open Project Modal
-    projectCards.forEach(card => {
-        card.addEventListener('click', () => {
-            const title = card.getAttribute('data-title');
-            const desc = card.getAttribute('data-desc');
-            const link = card.getAttribute('data-link');
-
-            modalTitle.textContent = title;
-            modalDesc.textContent = desc;
-            modalLink.href = link;
-
+    projectRows.forEach(row => {
+        row.addEventListener('click', () => {
+            modalTitle.textContent = row.getAttribute('data-title');
+            modalDesc.textContent = row.getAttribute('data-desc');
+            modalLink.href = row.getAttribute('data-link');
             projectModal.classList.add('active');
         });
     });
 
-    // Open About Modal
     aboutBtn.addEventListener('click', () => {
         aboutModal.classList.add('active');
     });
 
-    // Close Modals Function
     const closeModals = () => {
         projectModal.classList.remove('active');
         aboutModal.classList.remove('active');
@@ -50,23 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
     closeProjectBtn.addEventListener('click', closeModals);
     closeAboutBtn.addEventListener('click', closeModals);
     
-    // Close modal on clicking outside the content
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
         overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) {
-                closeModals();
-            }
+            if (e.target === overlay) closeModals();
         });
     });
 
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeModals();
-        }
-    });
-
-    // 2. Form Submission Prevent Default
+    // 5. Contact Form
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -74,126 +140,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitBtn = contactForm.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
             
-            // Visual feedback
-            submitBtn.textContent = 'Message Sent';
-            submitBtn.style.background = 'rgba(255,255,255,0.3)';
+            submitBtn.textContent = 'PING SENT_';
             
             contactForm.reset();
             
             setTimeout(() => {
                 submitBtn.textContent = originalText;
-                submitBtn.style.background = '';
             }, 3000);
         });
     }
 
-    // 3. Scroll Intersection Observer for fade-in animations
-    const sections = document.querySelectorAll('.section-title, .project-card, .anecdote-card, .form-glass, .social-links-container, .hero-subtext');
-    sections.forEach(sec => sec.classList.add('fade-in'));
-
-    const appearOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -100px 0px"
-    };
-
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-                return;
-            } else {
-                entry.target.classList.add('appear');
-                observer.unobserve(entry.target);
+    // 6. Smooth Scrolling for Sidebar Navigation
+    document.querySelectorAll('.nav-btn').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                // Scroll the center-content container, not the window
+                document.querySelector('.center-content').scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
             }
         });
-    }, appearOptions);
-
-    sections.forEach(section => {
-        appearOnScroll.observe(section);
     });
-
-    // 4. Flame Cursor Effect
-    const canvas = document.getElementById('pixelCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    const resizeCanvas = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    };
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let isMoving = false;
-    let moveTimeout;
-    let particles = [];
-
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        isMoving = true;
-        
-        clearTimeout(moveTimeout);
-        moveTimeout = setTimeout(() => {
-            isMoving = false;
-        }, 100);
-    });
-
-    class FlameParticle {
-        constructor(x, y) {
-            // Spawn around cursor
-            this.x = x + (Math.random() - 0.5) * 8;
-            this.y = y + (Math.random() - 0.5) * 8;
-            this.size = Math.random() * 6 + 3;
-            this.life = 1;
-            this.decay = Math.random() * 0.04 + 0.02;
-            this.speedY = Math.random() * -2 - 0.5; // Move up like fire
-            this.speedX = (Math.random() - 0.5) * 1;
-            
-            // Fire colors
-            const colors = ['#ffcc00', '#ff9900', '#ff3300', '#cc0000'];
-            this.color = colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        update() {
-            this.y += this.speedY;
-            this.x += this.speedX;
-            this.size *= 0.95; // Shrink as it rises
-            this.life -= this.decay;
-        }
-
-        draw() {
-            ctx.fillStyle = this.color;
-            ctx.globalAlpha = this.life;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.globalAlpha = 1;
-        }
-    }
-
-    const animateFlame = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Generate flame at cursor
-        if (isMoving) {
-            for (let i = 0; i < 2; i++) {
-                particles.push(new FlameParticle(mouseX, mouseY));
-            }
-        }
-
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-            
-            if (particles[i].life <= 0 || particles[i].size <= 0.1) {
-                particles.splice(i, 1);
-                i--;
-            }
-        }
-
-        requestAnimationFrame(animateFlame);
-    };
-
-    animateFlame();
 });
